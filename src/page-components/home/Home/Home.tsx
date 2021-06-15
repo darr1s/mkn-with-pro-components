@@ -136,8 +136,8 @@ export const Home: React.FC<IProps> = (props) => {
           },
         ],
       }}
-      title="Lead Monkey"
-      logo="/monkey-logo.svg"
+      title="Acme Corp"
+      logo="/acme.svg"
       menuHeaderRender={menuHeaderRender}
       menuItemRender={menuItemRender}
       headerContentRender={headerContentRender}
