@@ -16,6 +16,7 @@ import {
   HiOutlineSearch,
 } from 'react-icons/hi';
 import { HtmlMeta, HugeIcon, PageContainer } from '@/components';
+import { MenuDataItem, Route } from '@ant-design/pro-layout/lib/typings';
 
 import { FiTriangle } from 'react-icons/fi';
 import { IPageProps } from '@/interfaces';
@@ -37,12 +38,9 @@ const ProLayout = dynamic(() => import('@ant-design/pro-layout'), {
 
 export const Home: React.FC<IProps> = (props) => {
   const menuHeaderRender = (logo: React.ReactNode): React.ReactNode => (
-    <Link prefetch href="/">
-      <a>
-        {logo}
-        {/* eslint-disable-next-line react/prop-types */}
-        {/* {!props?.collapsed && title} */}
-      </a>
+    <Link prefetch href="/" as="button">
+      {logo}
+      {/* {!props?.collapsed && title} */}
     </Link>
   );
 
@@ -50,35 +48,30 @@ export const Home: React.FC<IProps> = (props) => {
     options: MenuDataItem,
     element: React.ReactNode,
   ): React.ReactNode => (
-    <Link prefetch href={options.path != undefined ? options.path : ''}>
-      <a>{element}</a>
+    <Link prefetch href={options.path !== undefined ? options.path : ''}>
+      <span>{element}</span>
     </Link>
   );
 
   const menu = (
     <Menu className="profile-menu">
       <Menu.Item>
-        <Link prefetch href="/profile">
-          <a>
-            <UserOutlined className="icon" />
-            <span className="title">Profile</span>
-          </a>
+        <Link prefetch href="/profile" as="button">
+          <UserOutlined className="icon" />
+          <span className="title">Profile</span>
         </Link>
       </Menu.Item>
       <Menu.Divider />
       <Menu.Item>
-        <Link prefetch href="/subscriptions">
-          <a>
-            <DollarOutlined className="icon" />
-            <span className="title">Plans</span>
-          </a>
+        <Link prefetch href="/subscriptions" as="button">
+          <DollarOutlined className="icon" />
+          <span className="title">Plans</span>
         </Link>
       </Menu.Item>
       <Menu.Divider />
       <Menu.Item
         onClick={(): void => {
-          shutdown();
-          store.dispatch(setLogout());
+          console.log('Trying to logout');
         }}
       >
         <LogoutOutlined className="icon" />
@@ -92,20 +85,20 @@ export const Home: React.FC<IProps> = (props) => {
       <Col span={12}>
         <div className="search-wrapper">
           <input type="text" placeholder="Search..." className="search" />
-          <button className="search-button">
+          <button className="search-button" type="button">
             <HiOutlineSearch />
           </button>
         </div>
       </Col>
       <Col span={12}>
         <div className="notification-wrapper">
-          <button className="notification-button">
+          <button className="notification-button" type="button">
             <HiOutlineBell />
           </button>
-          <button className="notification-button">
+          <button className="notification-button" type="button">
             <HiOutlineAnnotation />
           </button>
-          <button className="notification-button">
+          <button className="notification-button" type="button">
             <HiOutlineGift />
           </button>
         </div>
@@ -147,7 +140,6 @@ export const Home: React.FC<IProps> = (props) => {
       logo="/monkey-logo.svg"
       menuHeaderRender={menuHeaderRender}
       menuItemRender={menuItemRender}
-      rightContentRender={rightContentRender}
       headerContentRender={headerContentRender}
     >
       <PageContainer className={cx(styles['comp-wrapper'], props.className)}>
